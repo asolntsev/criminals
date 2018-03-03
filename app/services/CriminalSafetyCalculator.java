@@ -26,7 +26,7 @@ public class CriminalSafetyCalculator {
 
   public Verdict check(String ssn) {
     try {
-      List<CriminalRecord> criminalRecords = criminalRecords(ssn);
+      List<CriminalRecord> criminalRecords = restClient.get(serviceUrl + "?ssn=" + ssn);
       String explanation = criminalRecords.isEmpty() ?
           "криминальная история чиста. можно выпускать на волю." :
           "обнаружен криминал. нельзя выпускать на волю.";
@@ -35,9 +35,5 @@ public class CriminalSafetyCalculator {
       logger.error("Failed to check criminal history", e);
       return new Verdict(false, "не удалось проверить историю преступлений. Нельзя выпускать на волю.");
     }
-  }
-
-  private List<CriminalRecord> criminalRecords(String ssn) throws IOException {
-    return restClient.get(serviceUrl + "?ssn=" + ssn);
   }
 }
