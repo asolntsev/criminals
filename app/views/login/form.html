@@ -1,0 +1,16 @@
+#{extends 'main.html'/}
+
+<h1>Login</h1>
+
+#{form '/login', class: 'form-signin'}
+
+<label> Username
+  <input name="username" value="${username}" autofocus/>
+</label>
+
+<label> Password
+  <input name="password" value="${password}"/>
+</label>
+
+<input type="submit" value="Login"/>
+#{/form}
