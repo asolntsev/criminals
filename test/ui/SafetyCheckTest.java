@@ -44,9 +44,7 @@ public class SafetyCheckTest extends BaseUITest {
   public void noSafe_ifFailedToLoadHistory() {
     stubFor(get(urlEqualTo("/criminal-records?ssn=1111111111"))
         .willReturn(aResponse()
-            .withStatus(504)
-            .withHeader("Content-Type", "text/json")
-            .withBody("[]")));
+            .withStatus(504)));
 
     open("http://localhost:9000/dashboard");
     $("[name=ssn]").val("1111111111").pressEnter();
