@@ -50,19 +50,18 @@ test {
 }
 
 dependencies {
-    compile('com.codeborne.replay:replay-framework:1.6-git-sc')
-    compile('com.codeborne.replay:replay-rebel:1.6-git-sc')
-    compile('com.codeborne.replay:replay-fastergt:1.6-git-sc')
-    compile('com.codeborne.replay:replay-guice:1.6-git-sc')
-    compile('org.apache.httpcomponents:httpclient:4.5.4')
-    compile('org.apache.httpcomponents:fluent-hc:4.5.4')
+    compile('com.codeborne.replay:replay-framework:1.6-git')
+    compile('com.codeborne.replay:replay-fastergt:1.6-git')
+    compile('com.codeborne.replay:replay-guice:1.6-git')
+    compile('org.apache.httpcomponents:httpclient:4.5.6')
+    compile('org.apache.httpcomponents:fluent-hc:4.5.6')
 
-    testCompile('org.assertj:assertj-core:3.8.0')
+    testCompile('org.assertj:assertj-core:3.11.1')
     testCompile('com.codeborne:selenide:4.10.01')
     testCompile('junit:junit:4.12')
-    testCompile('org.mockito:mockito-core:2.10.0')
+    testCompile('org.mockito:mockito-core:2.21.0')
     testCompile('org.subethamail:subethasmtp:3.1.7') {transitive false}
-    testCompile('com.github.tomakehurst:wiremock:2.15.0')
+    testCompile('com.github.tomakehurst:wiremock:2.18.0')
 }
 
 test {
