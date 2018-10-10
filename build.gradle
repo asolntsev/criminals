@@ -57,9 +57,9 @@ dependencies {
     compile('org.apache.httpcomponents:fluent-hc:4.5.6')
 
     testCompile('org.assertj:assertj-core:3.11.1')
-    testCompile('com.codeborne:selenide:4.14.2')
+    testCompile('com.codeborne:selenide:5.0.0')
     testCompile('junit:junit:4.12')
-    testCompile('org.mockito:mockito-core:2.22.0')
+    testCompile('org.mockito:mockito-core:2.23.0')
     testCompile('org.subethamail:subethasmtp:3.1.7') {transitive false}
     testCompile('com.github.tomakehurst:wiremock:2.19.0')
 }
