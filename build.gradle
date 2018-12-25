@@ -5,13 +5,13 @@ task cleanLibs(type: Delete) {
 }
 
 task libsProd(type: Sync) {
-    from configurations.compile
-    into "build/lib"
+  from configurations.compile
+  into "build/lib"
 }
 
 task libsTest(type: Sync) {
-    from configurations.testRuntime
-    into "build/lib-test"
+  from configurations.testRuntime
+  into "build/lib-test"
 }
 
 task deps {}
@@ -19,63 +19,63 @@ compileJava.dependsOn deps
 deps.dependsOn(['cleanLibs', 'libsProd', 'libsTest'])
 
 repositories {
-    jcenter()
-    maven {
-      url uri("../replay/repo")
+  jcenter()
+  maven {
+    url uri("../replay/repo")
+  }
+  ivy {
+    url uri('https://repo.codeborne.com')
+    layout "pattern", {
+      artifact "/com.google.inject/[module]/[module]-[revision].[ext]"
     }
-    ivy {
-      url uri('https://repo.codeborne.com')
-      layout "pattern", {
-        artifact "/com.google.inject/[module]/[module]-[revision].[ext]"
-      }
-    }
+  }
 }
 
 compileJava {
-options.debugOptions.debugLevel = "source,lines,vars"
-options.fork = true
-options.compilerArgs << '-parameters'
-options.encoding = 'UTF-8'
+  options.debugOptions.debugLevel = "source,lines,vars"
+  options.fork = true
+  options.compilerArgs << '-parameters'
+  options.encoding = 'UTF-8'
 }
 
 sourceSets {
-main {
-  java {srcDir "app"}
-  resources {srcDirs "conf", "app"}
-}
-test {
-  java {srcDir "test"}
-  resources {srcDir "test"}
-}
+  main {
+    java {srcDir "app"}
+    resources {srcDirs "conf", "app"}
+  }
+  test {
+    java {srcDir "test"}
+    resources {srcDir "test"}
+  }
 }
 
 dependencies {
-    compile('com.codeborne.replay:replay-framework:1.6-git')
-    compile('com.codeborne.replay:replay-fastergt:1.6-git')
-    compile('com.codeborne.replay:replay-guice:1.6-git')
-    compile('org.apache.httpcomponents:httpclient:4.5.6')
-    compile('org.apache.httpcomponents:fluent-hc:4.5.6')
+  compile('com.codeborne.replay:replay-framework:1.6-git')
+  compile('com.codeborne.replay:replay-fastergt:1.6-git')
+  compile('com.codeborne.replay:replay-guice:1.6-git')
+  compile('org.apache.httpcomponents:httpclient:4.5.6')
+  compile('org.apache.httpcomponents:fluent-hc:4.5.6')
 
-    testCompile('org.assertj:assertj-core:3.11.1')
-    testCompile('com.codeborne:selenide:5.0.1')
-    testCompile('junit:junit:4.12')
-    testCompile('org.mockito:mockito-core:2.23.4')
-    testCompile('org.subethamail:subethasmtp:3.1.7') {transitive false}
-    testCompile('com.github.tomakehurst:wiremock:2.20.0')
+  testCompile('org.assertj:assertj-core:3.11.1')
+  testCompile('com.codeborne:selenide:5.1.0')
+  testCompile('junit:junit:4.12')
+  testCompile('org.mockito:mockito-core:2.23.4')
+  testCompile('org.subethamail:subethasmtp:3.1.7') {transitive false}
+  testCompile('com.github.tomakehurst:wiremock:2.20.0')
 }
 
 test {
-exclude 'ui/**'
+  exclude 'ui/**'
 }
 
 task uitest(type: Test) {
-include 'ui/**/*'
-systemProperties['BUILD_URL'] = System.getenv()['BUILD_URL']
+  include 'ui/**/*'
+  systemProperties['BUILD_URL'] = System.getenv()['BUILD_URL']
 }
 
 tasks.withType(Test).all { testTask ->
-testTask.systemProperties['file.encoding'] = 'UTF-8'
-testTask.testLogging {exceptionFormat = 'full'}
-testTask.outputs.upToDateWhen { false }
+  testTask.systemProperties['file.encoding'] = 'UTF-8'
+  testTask.testLogging {exceptionFormat = 'full'}
+  testTask.outputs.upToDateWhen { false }
 }
 
