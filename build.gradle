@@ -20,9 +20,6 @@ deps.dependsOn(['cleanLibs', 'libsProd', 'libsTest'])
 
 repositories {
   jcenter()
-  maven {
-    url uri("../replay/repo")
-  }
   ivy {
     url uri('https://repo.codeborne.com')
     layout "pattern", {
@@ -50,18 +47,18 @@ sourceSets {
 }
 
 dependencies {
-  compile('com.codeborne.replay:replay-framework:1.6-git')
-  compile('com.codeborne.replay:replay-fastergt:1.6-git')
-  compile('com.codeborne.replay:replay-guice:1.6-git')
-  compile('org.apache.httpcomponents:httpclient:4.5.12')
-  compile('org.apache.httpcomponents:fluent-hc:4.5.12')
+  implementation('com.codeborne.replay:framework:1.7')
+  implementation('com.codeborne.replay:fastergt:1.7')
+  implementation('com.codeborne.replay:guice:1.7')
+  implementation('org.apache.httpcomponents:httpclient:4.5.12')
+  implementation('org.apache.httpcomponents:fluent-hc:4.5.12')
 
-  testCompile('org.assertj:assertj-core:3.16.1')
-  testCompile('com.codeborne:selenide:5.1.0')
-  testCompile('junit:junit:4.13')
-  testCompile('org.mockito:mockito-core:3.3.3')
-  testCompile('org.subethamail:subethasmtp:3.1.7') {transitive false}
-  testCompile('com.github.tomakehurst:wiremock:2.25.0')
+  testImplementation('org.assertj:assertj-core:3.16.1')
+  testImplementation('com.codeborne:selenide:5.1.0')
+  testImplementation('junit:junit:4.13')
+  testImplementation('org.mockito:mockito-core:3.3.3')
+  testImplementation('org.subethamail:subethasmtp:3.1.7') {transitive false}
+  testImplementation('com.github.tomakehurst:wiremock:2.25.0')
 }
 
 test {

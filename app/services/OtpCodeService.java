@@ -27,6 +27,6 @@ public class OtpCodeService {
     mail.setMsg("Хочешь залогиниться? Введи этот код: " + otpCode);
     mail.setSubject("Логин в суперсервис");
     mail.addTo(username + "@superservice.com");
-    Mail.send(mail).get(5, SECONDS);
+    Mail.send(mail);
   }
 }
