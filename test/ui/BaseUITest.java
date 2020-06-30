@@ -5,6 +5,7 @@ import org.junit.Before;
 import play.Play;
 import play.server.Server;
 
+
 public class BaseUITest {
   @Before
   public final void startAUT() throws InterruptedException {
@@ -27,7 +28,7 @@ public class BaseUITest {
       Play play = new Play();
       play.init("test");
       play.start();
-      new Server().start();
+      new Server(play).start();
     }
   }
 }
