@@ -5,12 +5,12 @@ task cleanLibs(type: Delete) {
 }
 
 task libsProd(type: Sync) {
-  from configurations.compile
+  from configurations.compileClasspath
   into "build/lib"
 }
 
 task libsTest(type: Sync) {
-  from configurations.testRuntime
+  from configurations.testRuntimeClasspath - configurations.compileClasspath
   into "build/lib-test"
 }
 
@@ -20,12 +20,7 @@ deps.dependsOn(['cleanLibs', 'libsProd', 'libsTest'])
 
 repositories {
   jcenter()
-  ivy {
-    url uri('https://repo.codeborne.com')
-    layout "pattern", {
-      artifact "/com.google.inject/[module]/[module]-[revision].[ext]"
-    }
-  }
+  mavenCentral()
 }
 
 compileJava {
