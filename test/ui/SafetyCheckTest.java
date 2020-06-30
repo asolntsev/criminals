@@ -24,7 +24,7 @@ public class SafetyCheckTest extends BaseUITest {
             .withHeader("Content-Type", "text/json")
             .withBody("[]")));
 
-    open("http://localhost:9000/dashboard");
+    open("/dashboard");
     $("[name=ssn]").val("2222222222").pressEnter();
     $("#result").shouldHave(text("Результат: криминальная история чиста. можно выпускать на волю."));
   }
@@ -37,7 +37,7 @@ public class SafetyCheckTest extends BaseUITest {
             .withHeader("Content-Type", "text/json")
             .withBody("[{\"description\":\"убийство\"}, {\"description\":\"грабёж\"}]")));
 
-    open("http://localhost:9000/dashboard");
+    open("/dashboard");
     $("[name=ssn]").val("1111111111").pressEnter();
     $("#result").shouldHave(text("Результат: обнаружен криминал. нельзя выпускать на волю."));
   }
@@ -48,7 +48,7 @@ public class SafetyCheckTest extends BaseUITest {
         .willReturn(aResponse()
             .withStatus(504)));
 
-    open("http://localhost:9000/dashboard");
+    open("/dashboard");
     $("[name=ssn]").val("1111111111").pressEnter();
     $("#result").shouldHave(text("Результат: не удалось проверить историю преступлений. Нельзя выпускать на волю."));
   }

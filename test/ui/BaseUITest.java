@@ -12,7 +12,7 @@ public class BaseUITest {
     if (!Play.started) {
       new Application().start("test");
 
-      Configuration.baseUrl = "http://localhost:9000";
+      Configuration.baseUrl = "http://0.0.0.0:9000";
       Configuration.browserSize = "1024x800";
       Configuration.browser = "chrome";
     }
