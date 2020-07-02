@@ -61,3 +61,4 @@ The code in this repository is [MIT](https://github.com/asolntsev/criminals/blob
 In case you want to improve upon the project: fork it, commit changes to your branch, open a pull request. Thanks in advance.
 
 You can see build status of your pull requests at https://travis-ci.org/github/asolntsev/criminals 
+

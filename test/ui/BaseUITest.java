@@ -1,34 +1,20 @@
 package ui;
 
 import com.codeborne.selenide.Configuration;
+import criminals.Application;
 import org.junit.Before;
 import play.Play;
-import play.server.Server;
 
 
 public class BaseUITest {
   @Before
-  public final void startAUT() throws InterruptedException {
+  public final void startAUT() {
     if (!Play.started) {
-      Thread playStarter = new Thread(new ApplicationStarter(), "Play! starter thread");
+      new Application().start("test");
 
-      playStarter.start();
-      playStarter.join();
-
-      Configuration.baseUrl = "http://localhost:9000";
-      Configuration.startMaximized = false;
+      Configuration.baseUrl = "http://0.0.0.0:9000";
       Configuration.browserSize = "1024x800";
       Configuration.browser = "chrome";
-    }
-  }
-
-  private static class ApplicationStarter implements Runnable {
-    @Override
-    public void run() {
-      Play play = new Play();
-      play.init("test");
-      play.start();
-      new Server(play).start();
     }
   }
 }
