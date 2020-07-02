@@ -54,7 +54,7 @@ dependencies {
   testImplementation('com.codeborne:selenide:5.12.2')
   testImplementation('junit:junit:4.13')
   testImplementation('org.mockito:mockito-core:3.3.3')
-  testImplementation('org.subethamail:subethasmtp:3.1.7') {transitive false}
+  testImplementation('org.subethamail:subethasmtp:3.1.7') {transitive = false}
   testImplementation('com.github.tomakehurst:wiremock:2.25.0')
 }
 
@@ -71,6 +71,6 @@ task uitest(type: Test) {
 tasks.withType(Test).all { testTask ->
   testTask.systemProperties['file.encoding'] = 'UTF-8'
   testTask.testLogging {exceptionFormat = 'full'}
-  testTask.outputs.upToDateWhen { false }
+  testTask.outputs.upToDateWhen {false}
 }
 
