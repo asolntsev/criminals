@@ -47,7 +47,16 @@ As a result of `./gradlew jar` you will have the JAR file `build/libs/criminals.
 
 The following should start your application from the command line:
 
-    java -cp "build/classes/java/main:build/resources/main:build/lib/*:build/libs/*" criminals.Application
+    java -cp "build/lib/*:build/libs/*:build/classes/java/main" criminals.Application
+
+The classpath string (after `-cp`) contains three parts. The first bit (`build/lib/*`) points to the dependencies of the project as installed by Gradle.
+The second bit (`build/libs/*`) points the application JAR file as build Gradle.
+The last bit points to the folder with the application's `.class` files (`build/classes/java/main`) built by the Gradle build script, as that's what RePlay (and Play1 as well) use instead of the versions of these files found in the application's JAR file.
+
+
+### Troubleshooting
+
+You may find some `WARNING` blocks in the logs when running the application. These are safe to ignore, below some further explanation on what causes then and how to possibly fix them.
 
 Add this flag `--add-opens java.base/java.lang=ALL-UNNAMED` to reduce "illegal reflective access" warnings from `guice` (this will be fixed in a future version of `guice`).
 
