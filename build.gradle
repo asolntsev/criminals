@@ -44,7 +44,7 @@ sourceSets {
 }
 
 dependencies {
-  implementation('com.codeborne.replay:framework:1.7')
+  implementation('com.codeborne.replay:framework:1.8.0')
   implementation('com.codeborne.replay:fastergt:1.7')
   implementation('com.codeborne.replay:guice:1.7')
   implementation('org.apache.httpcomponents:httpclient:4.5.12')
