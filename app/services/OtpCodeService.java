@@ -16,7 +16,7 @@ public class OtpCodeService {
   }
 
   public String generateOtpCode() {
-    return RandomStringUtils.random(4);
+    return RandomStringUtils.randomNumeric(4);
   }
 
   public void sendOtpCode(String username, String otpCode) throws Exception {
