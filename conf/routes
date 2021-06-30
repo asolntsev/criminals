@@ -9,6 +9,8 @@ GET     /dashboard                              Dashboard.index
 
 POST    /check-criminal                         Criminals.check
 
+GET     /report/pdf                             Report.pdf
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
