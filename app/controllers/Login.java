@@ -1,14 +1,14 @@
 package controllers;
 
+import play.mvc.Controller;
 import play.mvc.results.Redirect;
 import play.mvc.results.Result;
-import play.rebel.RebelController;
 import play.rebel.View;
 import services.OtpCodeService;
 
 import javax.inject.Inject;
 
-public class Login extends RebelController {
+public class Login extends Controller {
   @Inject
   OtpCodeService otpCodeService;
 
