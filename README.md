@@ -38,17 +38,18 @@ You can press the "Run" button (with the green play icon) to start the applicati
 
 #### Auto-compilation and hot-swapping
 
-Newer versions of IntelliJ (2019+) support auto-compilation and hot-swapping in "Debug" mode.
+Newer versions of IntelliJ (2019+) support auto-compilation and hot-swapping in "Debug" mode, as long as class/method signatures do not change.
 This requires some configuration in `File -> Settings... -> Build, Execution, Deployment -> Debugger -> HotSwap`, namely:
 
 * Tick all the checkboxes.
 * Set "Reload classes after compilation" to `Always`.
 
-When running in "Debug" mode (the green "bug" icon next to the green "play" icon) you can trigger a code reload with `CTRL-SHIFT-F9` (or `SHIFT-CMD-F9`).
+When running in "Debug" mode (the green "bug" icon next to the green "play" icon) you can trigger a code reload with `CTRL-SHIFT-F9` (or `SHIFT-CMD-F9` on Mac).
 
 Afer that simply reload the page in your browser to see the changes in effect.
 
-If hot-swapping failed, you will see a notification in IDEA after which you need to restart the application.  
+If hot-swapping failed, you will see a notification in IDEA after which you need to restart the application.
+Usually this is due to too invasive changes. Restarting the "Debug" session (shortcut `SHIFT-F9`) will usually fix it.
 
 
 ### Deploying
