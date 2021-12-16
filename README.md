@@ -28,15 +28,25 @@ Here we describe how to do that with IntelliJ IDEA:
 1. Open the criminals project (not "import") by selecting the root of this project's repository
 2. Go to `Run -> Edit Configurations...`, click the `+` (Add New Configuration) in the top-right corner and select "Application"
 3. Fill in the following details, and click `OK`:
-  * Name: `criminals`
+  * Name: `Criminals`
   * Main class: `criminals.Application`
   * Use classpath of module: `criminals.main`
-  * JRE: select one your prefer, e.g. `11`
+  * JRE: select one your prefer, e.g. `14`
 
-Now the `criminals` run configuration shows up in the top-right of the screen. You can press the "Run" button (with the green play icon) to start the application.
+Now the `Criminals` run configuration shows up in the top-right of the screen.
+You can press the "Run" button (with the green play icon) to start the application.
 
-Code changes are automatically compiles and hot-swapped into the running application. In many cases it works immediately (until you change signatures of some methods).  
-You do not even need to save the file you are working on: simply reload the page in your browser to see the changes in effect.
+#### Auto-compilation and hot-swapping
+
+Newer versions of IntelliJ (2019+) support auto-compilation and hot-swapping in "Debug" mode.
+This requires some configuration in `File -> Settings... -> Build, Execution, Deployment -> Debugger -> HotSwap`, namely:
+
+* Tick all the checkboxes.
+* Set "Reload classes after compilation" to `Always`.
+
+When running in "Debug" mode (the green "bug" icon next to the green "play" icon) you can trigger a code reload with `CTRL-SHIFT-F9` (or `SHIFT-CMD-F9`).
+
+Afer that simply reload the page in your browser to see the changes in effect.
 
 If hot-swapping failed, you will see a notification in IDEA after which you need to restart the application.  
 
