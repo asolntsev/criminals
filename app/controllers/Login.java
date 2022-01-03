@@ -2,7 +2,12 @@ package controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import play.data.validation.Email;
+import play.data.validation.Min;
+import play.data.validation.Required;
+import play.data.validation.Validation;
 import play.mvc.Controller;
+import play.mvc.results.BadRequest;
 import play.mvc.results.Redirect;
 import play.mvc.results.Result;
 import play.rebel.View;
@@ -20,7 +25,10 @@ public class Login extends Controller {
     return new View("login/form.html");
   }
 
-  public Result firstStep(String username, String password) throws Exception {
+  public Result firstStep(@Required @Email String username, @Required @Min(8) String password) throws Exception {
+    if (Validation.hasErrors()) {
+      return new BadRequest("Validation errors: " + Validation.errors().toString());
+    }
     log.info("Logging in as {} ...", username);
     if (!username.equals(password)) {
       log.info("Wrong password for {}", username);
