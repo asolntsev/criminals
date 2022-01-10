@@ -7,8 +7,6 @@ import play.libs.Mail;
 
 import javax.inject.Singleton;
 
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 @Singleton
 public class OtpCodeService {
   public String generateOtpLabel() {
@@ -27,7 +25,7 @@ public class OtpCodeService {
     mail.setFrom("login@superservice.com");
     mail.setMsg("Хочешь залогиниться? Введи этот код: " + otpCode);
     mail.setSubject("Логин в суперсервис");
-    mail.addTo(username + "@superservice.com");
+    mail.addTo(username); // usernames are emails
     Mail.send(mail);
   }
 }
