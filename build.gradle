@@ -57,7 +57,7 @@ dependencies {
   implementation("org.apache.httpcomponents:httpclient:${httpclient_version}")
   implementation("org.apache.httpcomponents:fluent-hc:${httpclient_version}")
 
-  testImplementation('org.assertj:assertj-core:3.23.0')
+  testImplementation('org.assertj:assertj-core:3.23.1')
   testImplementation('com.codeborne:selenide:6.5.1')
   testImplementation('junit:junit:4.13.2')
   testImplementation('org.mockito:mockito-core:4.6.0')
