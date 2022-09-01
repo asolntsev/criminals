@@ -15,15 +15,15 @@ public class LoginTest extends BaseUITest {
   @Test
   public void loginWithOtpCode() {
     open("/");
-    $("[name=username]").val("admin");
-    $("[name=password]").val("admin").pressEnter();
+    $("[name=username]").val("admin@mail.ee");
+    $("[name=password]").val("admin@mail.ee").pressEnter();
     $("[name=otpCode]").should(appear);
 
     String firstEmail = mailServer.getMessages().get(0);
     String otpCode = firstEmail.replaceFirst("Хочешь залогиниться\\? Введи этот код: (.*)", "$1");
 
     $("[name=otpCode]").val(otpCode).pressEnter();
-    $("h1").shouldHave(text("Hello, admin!"));
+    $("h1").shouldHave(text("Hello, admin@mail.ee!"));
   }
 
 
