@@ -4,8 +4,6 @@ import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -24,9 +22,9 @@ public class SafetyCheckTest extends BaseUITest {
             .withHeader("Content-Type", "text/json")
             .withBody("[]")));
 
-    open("/dashboard");
-    $("[name=ssn]").val("2222222222").pressEnter();
-    $("#result").shouldHave(text("Результат: криминальная история чиста. можно выпускать на волю."));
+    DashboardPage page = open("/dashboard", DashboardPage.class);
+    CheckResultsPage checkResultsPage = page.checkSsn("2222222222");
+    checkResultsPage.verifyNoResults();
   }
 
   @Test
@@ -37,9 +35,9 @@ public class SafetyCheckTest extends BaseUITest {
             .withHeader("Content-Type", "text/json")
             .withBody("[{\"description\":\"убийство\"}, {\"description\":\"грабёж\"}]")));
 
-    open("/dashboard");
-    $("[name=ssn]").val("1111111111").pressEnter();
-    $("#result").shouldHave(text("Результат: обнаружен криминал. нельзя выпускать на волю."));
+    DashboardPage page = open("/dashboard", DashboardPage.class);
+    CheckResultsPage checkResultsPage = page.checkSsn("1111111111");
+    checkResultsPage.verifyResult("Результат: обнаружен криминал. нельзя выпускать на волю.");
   }
 
   @Test
@@ -48,8 +46,8 @@ public class SafetyCheckTest extends BaseUITest {
         .willReturn(aResponse()
             .withStatus(504)));
 
-    open("/dashboard");
-    $("[name=ssn]").val("1111111111").pressEnter();
-    $("#result").shouldHave(text("Результат: не удалось проверить историю преступлений. Нельзя выпускать на волю."));
+    DashboardPage page = open("/dashboard", DashboardPage.class);
+    CheckResultsPage checkResultsPage = page.checkSsn("1111111111");
+    checkResultsPage.verifyResult("Результат: не удалось проверить историю преступлений. Нельзя выпускать на волю.");
   }
 }
