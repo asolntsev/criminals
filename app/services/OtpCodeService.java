@@ -1,6 +1,5 @@
 package services;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.SimpleEmail;
 import play.libs.Mail;
@@ -14,7 +13,11 @@ public class OtpCodeService {
   }
 
   public String generateOtpCode() {
-    return RandomStringUtils.randomNumeric(4);
+    return String.format("%s%s%s%s", randomDigit(), randomDigit(), randomDigit(), randomDigit());
+  }
+
+  private int randomDigit() {
+    return (int) (Math.random() * 10);
   }
 
   public void sendOtpCode(String username, String otpCode) throws Exception {
