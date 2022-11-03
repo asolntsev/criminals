@@ -75,17 +75,12 @@ task uitest(type: Test) {
   systemProperties['selenide.headless'] = 'true'
 }
 
-tasks.withType(Test).all { testTask ->
-  testTask.testLogging {exceptionFormat = 'full'}
-  testTask.outputs.upToDateWhen {false}
+tasks.withType(Test) {
+  systemProperty "file.encoding", "UTF-8"
+  testLogging {exceptionFormat = 'full'}
+  outputs.upToDateWhen {false}
 }
 
-allprojects {
-  tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-  }
-      
-  tasks.withType(Test) {
-    systemProperty "file.encoding", "UTF-8"
-  }
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
 }
