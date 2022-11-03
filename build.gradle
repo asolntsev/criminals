@@ -30,7 +30,6 @@ compileJava {
   options.debugOptions.debugLevel = "source,lines,vars"
   options.fork = true
   options.compilerArgs << '-parameters'
-  options.encoding = 'UTF-8'
 }
 
 sourceSets {
@@ -77,8 +76,16 @@ task uitest(type: Test) {
 }
 
 tasks.withType(Test).all { testTask ->
-  testTask.systemProperties['file.encoding'] = 'UTF-8'
   testTask.testLogging {exceptionFormat = 'full'}
   testTask.outputs.upToDateWhen {false}
 }
 
+allprojects {
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+  }
+      
+  tasks.withType(Test) {
+    systemProperty "file.encoding", "UTF-8"
+  }
+}
