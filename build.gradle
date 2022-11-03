@@ -21,9 +21,13 @@ task deps {}
 compileJava.dependsOn deps
 deps.dependsOn(['cleanLibs', 'libsProd', 'libsTest'])
 
+configurations.all {
+  resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 repositories {
   mavenCentral()
-  //mavenLocal()
+  mavenLocal()
 }
 
 compileJava {
@@ -62,7 +66,7 @@ dependencies {
   testImplementation('org.mockito:mockito-core:4.8.1')
   testImplementation('org.subethamail:subethasmtp:3.1.7') {transitive = false}
   testImplementation('com.github.tomakehurst:wiremock:2.27.2')
-  testImplementation "com.codeborne:pdf-test:1.7.0"
+  testImplementation('com.codeborne:pdf-test:1.7.0')
 }
 
 test {
