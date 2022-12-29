@@ -17,8 +17,12 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
           java-version: '11'
-      - name: Run tests in Gradle
-        run: ./gradlew clean test --info --rerun-tasks
+      - name: Compile
+        run: ./gradlew clean compileTestJava
+      - name: Unit tests
+        run: ./gradlew clean test --info
+      - name: UI tests
+        run: ./gradlew uitest --info
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
