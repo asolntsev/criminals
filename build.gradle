@@ -2,26 +2,26 @@ apply plugin: 'java'
 
 defaultTasks 'clean', 'check'
 
-task cleanLibs(type: Delete) {
+tasks.register('cleanLibs', Delete) {
   delete 'build/lib', 'build/lib-test'
 }
 
-task libsProd(type: Sync) {
+tasks.register('libsProd', Sync) {
   from configurations.compileClasspath
   from configurations.runtimeClasspath
   into "build/lib"
 }
 
-task libsTest(type: Sync) {
+tasks.register('libsTest', Sync) {
   from configurations.testRuntimeClasspath - configurations.compileClasspath - configurations.runtimeClasspath
   into "build/lib-test"
 }
 
-task deps {}
+tasks.register('deps') {}
 compileJava.dependsOn deps
 deps.dependsOn(['cleanLibs', 'libsProd', 'libsTest'])
 
-configurations.all {
+configurations.configureEach {
   resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
@@ -65,7 +65,11 @@ dependencies {
   testImplementation('junit:junit:4.13.2')
   testImplementation('org.mockito:mockito-core:4.11.0')
   testImplementation('org.subethamail:subethasmtp:3.1.7') {transitive = false}
-  testImplementation('com.github.tomakehurst:wiremock:2.27.2')
+  testImplementation('com.github.tomakehurst:wiremock:2.27.2') {
+    exclude group: 'net.minidev'
+    exclude group: 'org.eclipse.jetty', module: 'jetty-client'
+  }
+  testImplementation('com.fasterxml.jackson.core:jackson-databind:2.14.1')
   testImplementation('com.codeborne:pdf-test:1.8.0')
 }
 
@@ -73,18 +77,18 @@ test {
   exclude 'ui/**'
 }
 
-task uitest(type: Test) {
+tasks.register('uitest', Test) {
   include 'ui/**/*'
   systemProperties['BUILD_URL'] = System.getenv()['BUILD_URL']
   systemProperties['selenide.headless'] = 'true'
 }
 
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
   systemProperty "file.encoding", "UTF-8"
-  testLogging {exceptionFormat = 'full'}
-  outputs.upToDateWhen {false}
+  testLogging { exceptionFormat = 'full' }
+  outputs.upToDateWhen { false }
 }
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8'
 }
