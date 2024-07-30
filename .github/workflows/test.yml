@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           cache: 'gradle'
@@ -23,11 +23,14 @@ jobs:
         run: ./gradlew clean test --info
       - name: UI tests
         run: ./gradlew uitest --info
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: test-report
-          path: build/reports/
+          retention-days: 21
+          path: |
+            **/build/reports
+            **/build/test-results
 
   auto-merge-dependabot:
     name: 🤖 Auto merge dependabot PR
@@ -40,7 +43,7 @@ jobs:
       contents: write
     steps:
       - name: 🤖 Merge PR from dependabot
-        uses: fastify/github-action-merge-dependabot@v3.5.4
+        uses: fastify/github-action-merge-dependabot@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           target: minor
