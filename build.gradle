@@ -2,6 +2,12 @@ apply plugin: 'java'
 
 defaultTasks 'clean', 'check'
 
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
+}
+
 tasks.register('cleanLibs', Delete) {
   delete 'build/lib', 'build/lib-test'
 }
