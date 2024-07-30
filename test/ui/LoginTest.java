@@ -21,23 +21,16 @@ public class LoginTest extends BaseUITest {
   }
 
   @Test
-  public void loginWithUsernameWhichDoesNotResembleAnEmailAddress() {
-    LoginPage page = open("/", LoginPage.class);
-    page.login("admin", "admin");
-    page.verifyUsernameWarning("validation.email");
-  }
-
-  @Test
   public void loginWithOtpCode() {
     LoginPage loginPage = open("/", LoginPage.class);
-    OtpCodePage otpPage = loginPage.login("admin@mail.ee", "admin@mail.ee");
+    OtpCodePage otpPage = loginPage.login("john", "secret");
     otpPage.otpCode.should(appear);
 
     String firstEmail = mailServer.getMessages().get(0);
     String otpCode = firstEmail.replaceFirst("Хочешь залогиниться\\? Введи этот код: (.*)", "$1");
 
     DashboardPage dashboardPage = otpPage.confirm(otpCode);
-    dashboardPage.header.shouldHave(text("Hello, admin@mail.ee!"));
+    dashboardPage.header.shouldHave(text("Hello, John Smith!"));
   }
 
   @BeforeEach

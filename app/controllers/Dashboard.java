@@ -7,6 +7,6 @@ import play.rebel.View;
 public class Dashboard extends Controller {
 
   public Result index() {
-    return new View("dashboard/index.html").with("username", session.get("username"));
+    return new View("dashboard/index.html").with("name", session.get("user.name"));
   }
 }

@@ -1,5 +1,6 @@
 package services;
 
+import models.User;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.SimpleEmail;
 import play.libs.Mail;
@@ -20,14 +21,14 @@ public class OtpCodeService {
     return (int) (Math.random() * 10);
   }
 
-  public String sendOtpCode(String username, String otpCode) throws Exception {
+  public String sendOtpCode(User user, String otpCode) throws Exception {
     Email mail = new SimpleEmail();
     mail.setCharset("UTF-8");
     mail.setFrom("login@superservice.com");
     mail.setMsg("Хочешь залогиниться? Введи этот код: " + otpCode);
     mail.setSubject("Логин в суперсервис");
-    mail.addTo(username); // usernames are emails
+    mail.addTo(user.email());
     Mail.send(mail);
-    return username;
+    return user.email();
   }
 }
