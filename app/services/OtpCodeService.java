@@ -20,15 +20,14 @@ public class OtpCodeService {
     return (int) (Math.random() * 10);
   }
 
-  public void sendOtpCode(String username, String otpCode) throws Exception {
+  public String sendOtpCode(String username, String otpCode) throws Exception {
     Email mail = new SimpleEmail();
     mail.setCharset("UTF-8");
-    //mail.setHostName(config.domain());
-    //String domain = config.domain();
     mail.setFrom("login@superservice.com");
     mail.setMsg("Хочешь залогиниться? Введи этот код: " + otpCode);
     mail.setSubject("Логин в суперсервис");
     mail.addTo(username); // usernames are emails
     Mail.send(mail);
+    return username;
   }
 }

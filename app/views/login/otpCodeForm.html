@@ -1,6 +1,11 @@
 #{extends 'main.html'/}
 
-Hello ${username}, please enter OTP Code
+<h1>Confirm your identity</h1>
+
+<div style="margin: 1vh 0">
+Hello ${username},<br>
+please enter OTP Code that we sent to ${sentTo}.
+</div>
 
 #{form '/login/second-step'}
     <label> ${otpLabel}-

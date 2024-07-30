@@ -39,14 +39,17 @@ public class Login extends Controller {
 
     String otpLabel = otpCodeService.generateOtpLabel();
     String otpCode = otpCodeService.generateOtpCode();
-    otpCodeService.sendOtpCode(username, otpCode);
+    String sentTo = otpCodeService.sendOtpCode(username, otpCode);
 
     session.put("login.username", username);
     session.put("login.otpLabel", otpLabel);
     session.put("login.otpCode", otpCode);
 
     log.info("Generated OTP code {} for {}, label: {}", otpCode, username, otpLabel);
-    return new View("login/otpCodeForm.html").with("otpLabel", otpLabel);
+    return new View("login/otpCodeForm.html")
+      .with("username", username)
+      .with("otpLabel", otpLabel)
+      .with("sentTo", sentTo);
   }
 
   public Result secondStep(String otpCode) {
