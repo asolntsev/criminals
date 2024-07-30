@@ -8,25 +8,6 @@ java {
   }
 }
 
-tasks.register('cleanLibs', Delete) {
-  delete 'build/lib', 'build/lib-test'
-}
-
-tasks.register('libsProd', Sync) {
-  from configurations.compileClasspath
-  from configurations.runtimeClasspath
-  into "build/lib"
-}
-
-tasks.register('libsTest', Sync) {
-  from configurations.testRuntimeClasspath - configurations.compileClasspath - configurations.runtimeClasspath
-  into "build/lib-test"
-}
-
-tasks.register('deps') {}
-compileJava.dependsOn deps
-deps.dependsOn(['cleanLibs', 'libsProd', 'libsTest'])
-
 configurations.configureEach {
   resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
@@ -90,7 +71,6 @@ test {
 
 tasks.register('uitest', Test) {
   include 'ui/**/*'
-  systemProperties['BUILD_URL'] = System.getenv()['BUILD_URL']
   systemProperties['selenide.headless'] = 'true'
 }
 
