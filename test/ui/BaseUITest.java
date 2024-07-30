@@ -2,14 +2,14 @@ package ui;
 
 import com.codeborne.selenide.Configuration;
 import criminals.Application;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import play.Play;
 
 import static com.codeborne.selenide.TextCheck.FULL_TEXT;
 
 
 public class BaseUITest {
-  @Before
+  @BeforeEach
   public final void startAUT() {
     if (!Play.started) {
       new Application().start("test");

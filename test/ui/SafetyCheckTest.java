@@ -1,8 +1,7 @@
 package ui;
 
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
-import org.junit.Rule;
-import org.junit.Test;
+import com.github.tomakehurst.wiremock.junit5.WireMockTest;
+import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
@@ -10,10 +9,8 @@ import static com.github.tomakehurst.wiremock.client.WireMock.get;
 import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
+@WireMockTest(httpPort = 9020)
 public class SafetyCheckTest extends BaseUITest {
-  @Rule
-  public WireMockRule wireMockRule = new WireMockRule(9020);
-
   @Test
   public void isSafe_ifHasEmptyHistory() {
     stubFor(get(urlEqualTo("/criminal-records?ssn=2222222222"))
