@@ -69,7 +69,7 @@ dependencies {
 
   constraints {
     testImplementation("com.jayway.jsonpath:json-path:2.9.0") {because 'used by wiremock'}
-    testImplementation("org.eclipse.jetty:jetty-bom:11.0.22") {because 'used by wiremock'}
+    testImplementation("org.eclipse.jetty:jetty-bom:12.0.13") {because 'used by wiremock'}
   }
 }
 
