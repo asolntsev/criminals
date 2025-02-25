@@ -43,7 +43,7 @@ sourceSets {
 buildscript {
   ext.replay_version = '2.3.1'
   ext.httpclient_version = '4.5.14'
-  ext.junitVersion = '5.11.4'
+  ext.junitVersion = '5.12.0'
 }
 
 dependencies {
@@ -57,8 +57,11 @@ dependencies {
 
   testImplementation('org.assertj:assertj-core:3.27.3')
   testImplementation('com.codeborne:selenide:7.7.3')
-  testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-  testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+  testImplementation platform("org.junit:junit-bom:$junitVersion")
+  testImplementation("org.junit.jupiter:junit-jupiter")
+  testImplementation "org.junit.platform:junit-platform-engine"
+  testImplementation "org.junit.platform:junit-platform-launcher"
+
   testImplementation('org.mockito:mockito-core:5.15.2')
   testImplementation('org.subethamail:subethasmtp:3.1.7') {transitive = false}
   testImplementation('com.github.tomakehurst:wiremock:3.0.1') {
