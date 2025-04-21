@@ -56,7 +56,7 @@ dependencies {
   implementation("org.apache.httpcomponents:fluent-hc:${httpclient_version}")
 
   testImplementation('org.assertj:assertj-core:3.27.3')
-  testImplementation('com.codeborne:selenide:7.8.1')
+  testImplementation('com.codeborne:selenide:7.9.0')
   testImplementation platform("org.junit:junit-bom:$junitVersion")
   testImplementation("org.junit.jupiter:junit-jupiter")
   testImplementation "org.junit.platform:junit-platform-engine"
