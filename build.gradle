@@ -68,7 +68,7 @@ dependencies {
     exclude group: 'org.eclipse.jetty', module: 'jetty-client'
   }
   testImplementation('com.fasterxml.jackson.core:jackson-databind:2.19.1')
-  testImplementation('com.codeborne:pdf-test:1.9.2')
+  testImplementation('com.codeborne:pdf-test:2.0.0')
 }
 
 test {
