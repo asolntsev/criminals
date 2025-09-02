@@ -15,12 +15,6 @@ configurations.configureEach {
 repositories {
   mavenCentral()
   mavenLocal()
-  maven {
-    url uri('https://oss.sonatype.org/content/repositories/snapshots/')
-    mavenContent {
-      snapshotsOnly()
-    }
-  }
 }
 
 compileJava {
@@ -41,17 +35,17 @@ sourceSets {
 }
 
 buildscript {
-  ext.replay_version = '2.3.1'
+  ext.replay_version = '2.7.1'
   ext.httpclient_version = '4.5.14'
   ext.junitVersion = '5.13.4'
 }
 
 dependencies {
-  implementation("com.codeborne.replay:framework:${replay_version}")
-  implementation("com.codeborne.replay:fastergt:${replay_version}")
-  implementation("com.codeborne.replay:guice:${replay_version}")
-  implementation("com.codeborne.replay:pdf:${replay_version}")
-  implementation("com.codeborne.replay:javanet:${replay_version}")
+  implementation("io.github.replay-framework:netty4:${replay_version}")
+  implementation("io.github.replay-framework:framework:${replay_version}")
+  implementation("io.github.replay-framework:fastergt:${replay_version}")
+  implementation("io.github.replay-framework:guice:${replay_version}")
+  implementation("io.github.replay-framework:pdf:${replay_version}")
   implementation("org.apache.httpcomponents:httpclient:${httpclient_version}")
   implementation("org.apache.httpcomponents:fluent-hc:${httpclient_version}")
 
@@ -87,8 +81,8 @@ tasks.withType(Test).configureEach {
   systemProperties['user.language'] = 'tr'
   testLogging {
     events "passed", "skipped", "failed"
-    showExceptions true
-    exceptionFormat 'full'
+    showExceptions = true
+    exceptionFormat = 'full'
   }
   outputs.upToDateWhen { false }
 }
