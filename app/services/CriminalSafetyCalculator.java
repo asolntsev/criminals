@@ -26,7 +26,7 @@ public class CriminalSafetyCalculator {
 
   public Verdict check(String ssn) {
     try {
-      List<CriminalRecord> criminalRecords = restClient.get(serviceUrl + "?ssn=" + ssn);
+      List<CriminalRecord> criminalRecords = restClient.get(serviceUrl + "?ssn=" + ssn, CriminalRecord.class);
       String explanation = criminalRecords.isEmpty() ?
           "криминальная история чиста. можно выпускать на волю." :
           "обнаружен криминал. нельзя выпускать на волю.";

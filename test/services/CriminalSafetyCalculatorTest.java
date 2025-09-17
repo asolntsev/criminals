@@ -19,7 +19,7 @@ public class CriminalSafetyCalculatorTest {
   @Test
   public void isSafeIfCriminalHistoryIsEmpty() throws IOException {
     // arrange
-    when(restClient.get(anyString())).thenReturn(emptyList());
+    when(restClient.get(anyString(), any())).thenReturn(emptyList());
 
     // act
     Verdict verdict = service.check("111222333");
@@ -27,13 +27,13 @@ public class CriminalSafetyCalculatorTest {
     // assert
     assertThat(verdict.canBeFree).isTrue();
     assertThat(verdict.explanation).isEqualTo("криминальная история чиста. можно выпускать на волю.");
-    verify(restClient).get("http://x.y.z/service?ssn=111222333");
+    verify(restClient).get("http://x.y.z/service?ssn=111222333", CriminalRecord.class);
   }
 
   @Test
   public void isUnsafeIfCriminalHistoryIsPresent() throws IOException {
     // arrange
-    when(restClient.get(anyString())).thenReturn(asList(new CriminalRecord("убийство")));
+    when(restClient.get(anyString(), any())).thenReturn(asList(new CriminalRecord("убийство")));
 
     // act
     Verdict verdict = service.check("111222333");
@@ -41,13 +41,13 @@ public class CriminalSafetyCalculatorTest {
     // assert
     assertThat(verdict.canBeFree).isFalse();
     assertThat(verdict.explanation).isEqualTo("обнаружен криминал. нельзя выпускать на волю.");
-    verify(restClient).get("http://x.y.z/service?ssn=111222333");
+    verify(restClient).get("http://x.y.z/service?ssn=111222333", CriminalRecord.class);
   }
 
   @Test
   public void throwsExceptionIfCouldNotCheckHistory() throws IOException {
     // arrange
-    when(restClient.get(anyString())).thenThrow(new IOException("could not connect"));
+    when(restClient.get(anyString(), any())).thenThrow(new IOException("could not connect"));
 
     // act
     Verdict verdict = service.check("111222333");
@@ -55,6 +55,6 @@ public class CriminalSafetyCalculatorTest {
     // assert
     assertThat(verdict.canBeFree).isFalse();
     assertThat(verdict.explanation).isEqualTo("не удалось проверить историю преступлений. Нельзя выпускать на волю.");
-    verify(restClient).get("http://x.y.z/service?ssn=111222333");
+    verify(restClient).get("http://x.y.z/service?ssn=111222333", CriminalRecord.class);
   }
 }
