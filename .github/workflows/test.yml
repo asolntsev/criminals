@@ -16,7 +16,7 @@ jobs:
         with:
           distribution: 'temurin'
           cache: 'gradle'
-          java-version: '17'
+          java-version: '25-ea'
       - name: Unit tests
         run: ./gradlew test --info
       - name: UI tests
