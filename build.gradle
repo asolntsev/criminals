@@ -76,6 +76,8 @@ tasks.register('uitest', Test) {
 
 tasks.withType(Test).configureEach {
   useJUnitPlatform()
+  testClassesDirs = testing.suites.test.sources.output.classesDirs
+  classpath = testing.suites.test.sources.runtimeClasspath
   systemProperties['file.encoding'] = "UTF-8"
   systemProperties['user.country'] = 'TR'
   systemProperties['user.language'] = 'tr'
