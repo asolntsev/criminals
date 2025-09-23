@@ -49,7 +49,7 @@ dependencies {
   implementation("org.apache.httpcomponents:httpclient:${httpclient_version}")
   implementation("org.apache.httpcomponents:fluent-hc:${httpclient_version}")
 
-  testImplementation('org.assertj:assertj-core:3.27.5')
+  testImplementation('org.assertj:assertj-core:3.27.6')
   testImplementation('com.codeborne:selenide:7.10.1')
   testImplementation platform("org.junit:junit-bom:$junitVersion")
   testImplementation("org.junit.jupiter:junit-jupiter")
