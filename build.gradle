@@ -37,7 +37,7 @@ sourceSets {
 buildscript {
   ext.replay_version = '2.7.1'
   ext.httpclient_version = '4.5.14'
-  ext.junitVersion = '5.13.4'
+  ext.junitVersion = '6.0.0'
 }
 
 dependencies {
