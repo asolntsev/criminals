@@ -61,7 +61,7 @@ dependencies {
   testImplementation('org.wiremock:wiremock:3.13.2') {
     exclude group: 'org.eclipse.jetty', module: 'jetty-client'
   }
-  testImplementation('com.fasterxml.jackson.core:jackson-databind:2.20.1')
+  testImplementation('com.fasterxml.jackson.core:jackson-databind:2.21.0')
   testImplementation('com.codeborne:pdf-test:2.1.0')
 }
 
