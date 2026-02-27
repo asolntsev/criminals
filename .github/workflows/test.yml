@@ -21,7 +21,7 @@ jobs:
         run: ./gradlew test --info
       - name: UI tests
         run: ./gradlew uitest --info
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: test-report
