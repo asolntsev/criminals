@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A small demo web app built on **RePlay** (`io.github.replay-framework`, v2.8.0) — a fork/successor of Play1. It exists as a reference for comparing Play1-style and RePlay-style projects. The app lets an operator log in (with email OTP as a second step) and check whether a person (by SSN) has a criminal record, delegating to an external records service over HTTP.
+A small demo web app built on **RePlay** (`io.github.replay-framework`, v2.8.2) — a fork/successor of Play1. It exists as a reference for comparing Play1-style and RePlay-style projects. The app lets an operator log in (with email OTP as a second step) and check whether a person (by SSN) has a criminal record, delegating to an external records service over HTTP.
 
 ## Commands
 
